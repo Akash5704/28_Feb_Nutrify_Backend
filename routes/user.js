@@ -27,13 +27,14 @@ router.post("/signup", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
 
         const newUser = new User({
-            email,
-            password: hashedPassword,
-            Goal,
-            TargetWeight,
-            WeightSpeed,
-            DietType,
-            ...otherUserData,
+          email,
+          password: hashedPassword,
+          // Convert to lowercase to match schema
+          goal: Goal,
+          targetWeight: TargetWeight,
+          weightSpeed: WeightSpeed,
+          dietType: DietType,
+          ...otherUserData,
         });
 
         await newUser.save();
